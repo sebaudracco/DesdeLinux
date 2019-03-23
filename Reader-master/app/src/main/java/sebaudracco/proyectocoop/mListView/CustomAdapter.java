@@ -1,17 +1,12 @@
 package sebaudracco.proyectocoop.mListView;
 
 import android.content.Context;
-import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Build;
-import android.os.Environment;
-import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.ImageView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -19,15 +14,13 @@ import java.util.ArrayList;
 import sebaudracco.proyectocoop.R;
 import sebaudracco.proyectocoop.mDataObject.Spacecraft;
 
-import static sebaudracco.proyectocoop.R.drawable.img_base;
-
 public class CustomAdapter extends BaseAdapter {
 
     Context c;
     ArrayList<Spacecraft> spacecrafts;
     LayoutInflater inflater;
     Spacecraft spacecraft;
-    ImageView ima;
+  //  ImageView ima;
 
     public CustomAdapter(Context c, ArrayList<Spacecraft> spacecrafts) {
         this.c = c;
@@ -69,7 +62,7 @@ public class CustomAdapter extends BaseAdapter {
         holder.nameTxt4.setText(spacecrafts.get(position).getMedidor());
         holder.nameTxt5.setText(spacecrafts.get(position).getNueva());
         // Aqui muestro la foto!
-        holder.imagemId.setImageBitmap(spacecrafts.get(position).getBitmap2());
+   //     holder.imagemId.setImageBitmap(spacecrafts.get(position).getBitmap2());
 
 
 
@@ -93,7 +86,49 @@ public class CustomAdapter extends BaseAdapter {
         return convertView;
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
 
+    public View getnewView(final int position, View convertView, ViewGroup parent) {
+        if(inflater==null)
+        {
+            inflater= (LayoutInflater) c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+        }
+        if(convertView==null)
+        {
+            convertView=inflater.inflate( R.layout.model,parent,false);
+        }
+
+        //BIND DATA
+        MyViewHolder holder=new MyViewHolder(convertView);
+        holder.nameTxt.setText(spacecrafts.get(position+1).getId());
+        holder.nameTxt2.setText(spacecrafts.get(position+1).getName());
+        holder.nameTxt3.setText(spacecrafts.get(position+1).getAddress());
+        holder.nameTxt4.setText(spacecrafts.get(position+1).getMedidor());
+        holder.nameTxt5.setText(spacecrafts.get(position+1).getNueva());
+        // Aqui muestro la foto!
+        //     holder.imagemId.setImageBitmap(spacecrafts.get(position).getBitmap2());
+
+
+
+
+
+
+        convertView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(c, spacecrafts.get(position).getName(), Toast.LENGTH_SHORT).show();
+            }
+        });
+
+        holder.setLongClickListener(new MyLongClickListener() {
+            @Override
+            public void onItemLongClick() {
+                spacecraft= (Spacecraft) getItem(position);
+            }
+        });
+
+        return convertView;
+    }
 
     //EXPOSE NAME AND ID
     public String getSelectedItemID()
@@ -113,5 +148,5 @@ public class CustomAdapter extends BaseAdapter {
         return spacecraft.getNueva();
     }
     public String getSelectedItemMedidor(){return  spacecraft.getMedidor ();}
-    public Bitmap getSelectedItemFoto(){return  spacecraft.getBitmap2 ();}
+ //   public Bitmap getSelectedItemFoto(){return  spacecraft.getBitmap2 ();}
 }

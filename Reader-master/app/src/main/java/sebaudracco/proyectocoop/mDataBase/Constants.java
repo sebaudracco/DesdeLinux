@@ -1,13 +1,4 @@
 package sebaudracco.proyectocoop.mDataBase;
-import android.content.ContentValues;
-import android.content.Context;
-import android.database.Cursor;
-import android.database.sqlite.SQLiteDatabase;
-import android.database.sqlite.SQLiteOpenHelper;
-import android.widget.ImageView;
-
-import java.sql.Blob;
-
 public class Constants {
 
     //COLUMNS
@@ -16,7 +7,7 @@ public class Constants {
     public static final String ADDRESS="address";
     public static final String MEDIDOR="medidor";
     public static final String NEW= "nueva" ;
-    public static final String FOTO="foto";
+ //   public static final String FOTO="foto";
 
 
     /* DB PROPERTIES */

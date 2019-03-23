@@ -3,6 +3,7 @@
     package="sebaudracco.proyectocoop">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
     <uses-permission android:name="android.permission.GET_ACCOUNTS" />
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
@@ -11,6 +12,9 @@
     <uses-permission android:name="android.permission.STORAGE" />
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.CAMERA" />
+    <uses-permission android:name="android.permission.USE_CREDENTIALS" />
+
+
     <uses-feature
         android:name="android.hardware.camera.any"
         android:required="true" />
@@ -37,7 +41,7 @@
         <activity
             android:name=".LoginActivity"
             android:background="#228B22"
-            android:label="@string/login">
+            android:label="Lector De Estados">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,12 +49,20 @@
             </intent-filter>
         </activity>
         <activity
+            android:name=".LogGoog"
+            android:background="#228B22"
+            android:label="Login "></activity>
+        <activity
             android:name=".MainActivity"
             android:background="#228B22"
             android:label="Lector de Estados"></activity>
         <activity
+            android:name=".MainActivityLecturista"
+            android:background="#228B22"
+            android:label="Lector de Estados"></activity>
+        <activity
             android:name=".Main2Activity"
-            android:label="@string/title_activity_main2"
+            android:label="Exportar Lecturas a Excel"
             android:parentActivityName=".MainActivity"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar">
             <meta-data
@@ -60,7 +72,7 @@
 
         <activity
             android:name=".sqlitetoexcel.SqliteActivity"
-            android:label="@string/title_activity_main3"
+            android:label="Adjuntar y Enviar"
             android:parentActivityName=".Main2Activity"
             android:theme="@style/AppTheme.NoActionBar.NoActionBar">
             <meta-data
@@ -75,7 +87,7 @@
 
         <provider
             android:name="android.support.v4.content.FileProvider"
-            android:authorities="sebaudracco.proyectocoop.FileProvider"
+            android:authorities="sebaudracco.proyectocoop.fileProvider"
             android:exported="false"
             android:grantUriPermissions="true">
             <meta-data
@@ -85,4 +97,11 @@
 
     </application>
 
+    <meta-data
+        android:name="com.google.android.gms.version"
+        android:value="@integer/google_play_services_version" />
+
+
 </manifest>
+
+

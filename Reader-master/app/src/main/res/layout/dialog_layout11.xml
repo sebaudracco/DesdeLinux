@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<android.support.v7.widget.CardView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="wrap_content"
+    android:layout_height="match_parent"
+    android:layout_margin="1dp"
+    android:orientation="horizontal"
+    card_view:cardCornerRadius="5dp"
+    card_view:cardElevation="5dp">
+
+
+    <LinearLayout
+        android:layout_width="307dp"
+        android:layout_height="151dp"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="102dp"
+            android:text="Reordenar Ruta ?"
+            android:textAppearance="@style/TextAppearance.AppCompat.Headline" />
+
+
+        <Button
+            android:id="@+id/orderBtn"
+            android:layout_width="278dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginBottom="20dp"
+            android:background="#228B22"
+            android:clickable="true"
+            android:text="SI!"
+            android:textColor="@android:color/white" />
+
+
+    </LinearLayout>
+
+</android.support.v7.widget.CardView>

@@ -36,9 +36,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.util.ArrayList;
 
-import sebaudracco.proyectocoop.mDataBase.Constants;
 import sebaudracco.proyectocoop.mDataBase.DBAdapter;
-import sebaudracco.proyectocoop.mDataBase.DBHelper;
 import sebaudracco.proyectocoop.mDataObject.Spacecraft;
 import sebaudracco.proyectocoop.mListView.CustomAdapter;
 
@@ -55,11 +53,11 @@ import static sebaudracco.proyectocoop.R.layout;
 //import static sebaudracco.proyectocoop.mDataBase.Constants.FOTO;
 
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivityLecturista extends AppCompatActivity {
 
     ListView lv;
     EditText nameEditText, nameEditText2, nameEditText3,nameEditText4,nameEditText5, nameEditText6;
-    Button saveBtn,retrieveBtn, orderBtn;
+    Button saveBtn,retrieveBtn;
     ArrayList<Spacecraft> spacecrafts=new ArrayList<>();
     CustomAdapter adapter;
     final Boolean forUpdate=true;
@@ -86,7 +84,7 @@ public class MainActivity extends AppCompatActivity {
         spacecraft.getAddress ();
         spacecraft.getMedidor ();
         spacecraft.getNueva ();
-    //    spacecraft.getBitmap2 ();
+        //    spacecraft.getBitmap2 ();
 
         lv=  findViewById(id.lv);
         adapter=new CustomAdapter(this,spacecrafts);
@@ -99,193 +97,35 @@ public class MainActivity extends AppCompatActivity {
             @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
             @Override
             public void onClick(View view) {
-                displayDialog(false);
-                fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(color.colorPrimary)));
+
+
+               /* displayDialog(false);
+                fab.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(color.mi_color_verde)));
+            */
+
             }
+            //Toast.makeText(this,"No tiene permisos para Borrar el Registro!",Toast.LENGTH_LONG).show();
         });
 
 
-         final FloatingActionButton share = findViewById(id.share);
+        final FloatingActionButton share = findViewById(id.share);
         share.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                share.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(color.colorPrimary)));
-                Intent Myintent = new Intent ( MainActivity.this, Main2Activity.class );
+                share.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(color.mi_color_verde)));
+                Intent Myintent = new Intent ( MainActivityLecturista.this, Main2Activity.class );
                 startActivity ( Myintent );
-                Toast.makeText ( MainActivity.this, " Estas a punto de exportar la Lista a Excel!", Toast.LENGTH_LONG ).show ();
+                Toast.makeText ( MainActivityLecturista.this, " Estas a punto de exportar la Lista a Excel!", Toast.LENGTH_LONG ).show ();
 
             }
         });
-
-        final FloatingActionButton order = findViewById(id.order);
-        order.setOnClickListener(new View.OnClickListener() {
-            @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-            @Override
-            public void onClick(View view) {
-                order.setBackgroundTintList(ColorStateList.valueOf(getResources().getColor(color.colorPrimary)));
-                displayDialog11(false);
-
-                Toast.makeText ( MainActivity.this, " Deseas Reordenar la Ruta?", Toast.LENGTH_LONG ).show ();
-
-
-            }
-        });
-        }
-
-
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void displayDialog11(Boolean forUpdate)
-    {
-
-
-        Dialog d=new Dialog(this);
-        d.setTitle("Ingresar Datos del Socio: ");
-        d.setContentView(layout.dialog_layout11);
-        orderBtn=  d.findViewById(id.orderBtn);
-
-        if(!forUpdate)
-        {
-            orderBtn.setOnClickListener(new View.OnClickListener() {
-                @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-                @Override
-                public void onClick(View v) {
-
-                    ordenar();
-
-
-                }
-
-            });
-
-
-        }
-
-        d.show();
-
-
     }
 
-    private void ordenar() {
-        DBAdapter db=new DBAdapter(this);
-
-        db.openDB();
-
-        //boolean ordenado;
-
-        Cursor c=db.readData();
-        //else ordenado = false;
-
-
-            getSpacecrafts();
-
-
-        lv.setAdapter(adapter);
-        db.closeDB();
-
-
-
-
-    }
 
     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
     private void displayDialog(Boolean forUpdate)
     {
 
-
-        Dialog d=new Dialog(this);
-        d.setTitle("Ingresar Datos del Socio: ");
-        d.setContentView(layout.dialog_layout);
-
-        nameEditText=  d.findViewById(nameEditTxt);
-        nameEditText2=  d.findViewById(nameEditTxt2);
-        nameEditText3=  d.findViewById(nameEditTxt3);
-        nameEditText4=  d.findViewById(nameEditTxt4);
-        nameEditText5=  d.findViewById(nameEditTxt5);
-  //      imagemId=  d.findViewById(id.imagemId);
-  //      botonCargar=  d.findViewById(btnCargarImg);
-
-
-
-        saveBtn=  d.findViewById(id.saveBtn);
-        retrieveBtn=  d.findViewById(id.retrieveBtn);
-
-        if(!forUpdate)
-        {
-                        saveBtn.setOnClickListener(new View.OnClickListener() {
-                    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-                    @Override
-                    public void onClick(View v) {
-                        String nameTxt = nameEditText.getText().toString();
-                        String nameTxt2 = nameEditText2.getText().toString();
-                        String nameTxt3 = nameEditText3.getText().toString();
-                        String nameTxt4 = nameEditText4.getText().toString();
-                        String nameTxt5 = nameEditText5.getText().toString();
-                   //     ImageView imagemId= cargarImagen ();
-
-                        if(nameTxt.length () != 0 && nameTxt2.length() != 0 && nameTxt3.length() != 0&& nameTxt4.length() != 0 && nameTxt5.length() != 0 ){
-                            save(nameTxt,nameTxt2, nameTxt3, nameTxt4, nameTxt5);//, imagemId
-                            nameEditText.setText("");
-                            nameEditText2.setText("");
-                            nameEditText3.setText("");
-                            nameEditText4.setText("");
-                            nameEditText5.setText("");
-
-                            Toast.makeText(MainActivity.this,"Registro Agregado!",Toast.LENGTH_SHORT).show();
-                        }
-                        else{
-                            Toast.makeText(MainActivity.this,"Debes Completar los campos requeridos!!",Toast.LENGTH_LONG).show();
-                        }
-                    }
-
-                        });
-
-              retrieveBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    getSpacecrafts();
-                }
-            });
-        }
-
-        else {
-
-            //SET SELECTED TEXT
-            nameEditText.setText(adapter.getSelectedItemID ());
-            nameEditText2.setText(adapter.getSelectedItemName());
-            nameEditText3.setText(adapter.getSelectedItemAddress ());
-            nameEditText4.setText(adapter.getSelectedItemMedidor ());
-            nameEditText5.setText(adapter.getSelectedItemNuevo ());
-        //    imagemId.setImageBitmap ( adapter.getSelectedItemFoto () );
-
-
-
-            saveBtn.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    update(nameEditText.getText().toString());
-                    update(nameEditText2.getText().toString());
-                    update(nameEditText3.getText().toString());
-                    update(nameEditText4.getText().toString());
-                    update(nameEditText5.getText().toString());
-
-                }
-            });
-            retrieveBtn.setOnClickListener(new View.OnClickListener() {
-               @Override
-               public void onClick(View v) {
-                    getSpacecrafts();
-                }
-            });
-        }
-
-        d.show();
-
-
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
-    private void displayDialog1(Boolean forUpdate)
-    {
 
         Dialog d=new Dialog(this);
         d.setTitle("SQLITE DATA");
@@ -318,17 +158,17 @@ public class MainActivity extends AppCompatActivity {
                     //     ImageView imagemId= cargarImagen ();
 
                     if(nameTxt.length () != 0 && nameTxt2.length() != 0 && nameTxt3.length() != 0&& nameTxt4.length() != 0 && nameTxt5.length() != 0 ){
-                        saveContinue(nameTxt,nameTxt2, nameTxt3, nameTxt4, nameTxt5);//, imagemId
+                        save(nameTxt,nameTxt2, nameTxt3, nameTxt4, nameTxt5);//, imagemId
                         nameEditText.setText("");
                         nameEditText2.setText("");
                         nameEditText3.setText("");
                         nameEditText4.setText("");
                         nameEditText5.setText("");
 
-                        Toast.makeText(MainActivity.this,"Registro Agregado!",Toast.LENGTH_SHORT).show();
+                        Toast.makeText(MainActivityLecturista.this,"Registro Agregado!",Toast.LENGTH_SHORT).show();
                     }
                     else{
-                        Toast.makeText(MainActivity.this,"Debes Completar los campos requeridos!!",Toast.LENGTH_LONG).show();
+                        Toast.makeText(MainActivityLecturista.this,"Debes Completar los campos requeridos!!",Toast.LENGTH_LONG).show();
                     }
                 }
 
@@ -375,7 +215,9 @@ public class MainActivity extends AppCompatActivity {
 
         d.show();
 
+
     }
+
 
 
 
@@ -422,7 +264,7 @@ public class MainActivity extends AppCompatActivity {
 
     private void solicitarPermisosManual() {
         final CharSequence[] opciones={"si","no"};
-        final AlertDialog.Builder alertOpciones=new AlertDialog.Builder(MainActivity.this);
+        final AlertDialog.Builder alertOpciones=new AlertDialog.Builder(MainActivityLecturista.this);
         alertOpciones.setTitle("¿Desea configurar los permisos de forma manual?");
         alertOpciones.setItems(opciones, new DialogInterface.OnClickListener() {
             @Override
@@ -443,7 +285,7 @@ public class MainActivity extends AppCompatActivity {
     }
 
     private void cargarDialogoRecomendacion() {
-        AlertDialog.Builder dialogo=new AlertDialog.Builder(MainActivity.this);
+        AlertDialog.Builder dialogo=new AlertDialog.Builder(MainActivityLecturista.this);
         dialogo.setTitle("Permisos Desactivados");
         dialogo.setMessage("Debe aceptar los permisos para el correcto funcionamiento de la App");
 
@@ -466,7 +308,7 @@ public class MainActivity extends AppCompatActivity {
     private ImageView cargarImagen() {
 
         final CharSequence[] opciones={"Tomar Foto","Cargar Imagen","Cancelar"};
-        final AlertDialog.Builder alertOpciones=new AlertDialog.Builder(MainActivity.this);
+        final AlertDialog.Builder alertOpciones=new AlertDialog.Builder(MainActivityLecturista.this);
         alertOpciones.setTitle("Seleccione una Opción");
         alertOpciones.setItems(opciones, new DialogInterface.OnClickListener() {
             @Override
@@ -510,7 +352,7 @@ public class MainActivity extends AppCompatActivity {
         File imagen = new File ( path );
 
         Intent intent = new Intent ( MediaStore.ACTION_IMAGE_CAPTURE );
-      //  intent = new Intent ( MediaStore.ACTION_IMAGE_CAPTURE );
+        //  intent = new Intent ( MediaStore.ACTION_IMAGE_CAPTURE );
         ////
         Uri imageUri = null;
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.N ) {
@@ -535,7 +377,7 @@ public class MainActivity extends AppCompatActivity {
             switch (requestCode){
                 case COD_SELECCIONA:
                     Uri miPath=data.getData();
-                   imagemId.setImageURI (miPath);
+                    imagemId.setImageURI (miPath);
                     break;
 
                 case COD_FOTO:
@@ -547,8 +389,8 @@ public class MainActivity extends AppCompatActivity {
                                 }
                             });
 
-                  Bitmap bitmap= BitmapFactory.decodeFile(path);
-                   imagemId.setImageBitmap(bitmap);
+                    Bitmap bitmap= BitmapFactory.decodeFile(path);
+                    imagemId.setImageBitmap(bitmap);
 
                     break;
             }
@@ -564,32 +406,6 @@ public class MainActivity extends AppCompatActivity {
         db.openDB();
         boolean saved;
         if (db.add ( id, name , address, medidor, nueva)) saved = true;//, foto
-        else saved = false;
-
-        if(saved)
-        {
-            nameEditText.setText("");
-            nameEditText2.setText("");
-            nameEditText3.setText("");
-            nameEditText4.setText("");
-            nameEditText5.setText("");
-
-
-            getSpacecrafts();
-        }
-
-        else {
-            Toast.makeText(this,"Imposible Grabar",Toast.LENGTH_SHORT).show();
-        }
-    }
-
-    //SAVE
-    private void saveContinue(String id, String name, String address, String medidor, String nueva)//, ImageView foto
-    {
-        DBAdapter db=new DBAdapter(this);
-        db.openDB();
-        boolean saved;
-        if (db.addToContinue ( id, name , address, medidor, nueva)) saved = true;//, foto
         else saved = false;
 
         if(saved)
@@ -626,11 +442,11 @@ public class MainActivity extends AppCompatActivity {
             String medidor=c.getString(3);
             String nueva=c.getString(4);
 
-       //     byte[] img = c.getBlob ( 5 );
+            //     byte[] img = c.getBlob ( 5 );
 
-       //     Bitmap bitmap = BitmapFactory.decodeByteArray(img, 0, img.length);
-         //   ByteArrayOutputStream stream = new ByteArrayOutputStream ();
-           // bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
+            //     Bitmap bitmap = BitmapFactory.decodeByteArray(img, 0, img.length);
+            //   ByteArrayOutputStream stream = new ByteArrayOutputStream ();
+            // bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
 
 
             spacecraft=new Spacecraft();
@@ -642,16 +458,16 @@ public class MainActivity extends AppCompatActivity {
 
             // convert from byte array to bitmap
 
-        //    Bitmap bitmap = BitmapFactory.decodeByteArray(img, 0, img.length);
-        //    ByteArrayOutputStream stream = new ByteArrayOutputStream ();
+            //    Bitmap bitmap = BitmapFactory.decodeByteArray(img, 0, img.length);
+            //    ByteArrayOutputStream stream = new ByteArrayOutputStream ();
 //            bitmap.compress(Bitmap.CompressFormat.PNG, 0, stream);
 
-        //    BitmapFactory.Options options = new BitmapFactory.Options();
-        //    options.inSampleSize = 8;
+            //    BitmapFactory.Options options = new BitmapFactory.Options();
+            //    options.inSampleSize = 8;
 
-        //    bitmap = BitmapFactory.decodeFile(FOTO,options);
+            //    bitmap = BitmapFactory.decodeFile(FOTO,options);
 
-        //    spacecraft.setBitmap2(bitmap);
+            //    spacecraft.setBitmap2(bitmap);
 
             spacecrafts.add(spacecraft);
         }
@@ -719,7 +535,7 @@ public class MainActivity extends AppCompatActivity {
         if(deleted)
         {
             getSpacecrafts();
-            Toast.makeText(MainActivity.this,"Registro Borrado!",Toast.LENGTH_LONG).show();
+            Toast.makeText(MainActivityLecturista.this,"Registro Borrado!",Toast.LENGTH_LONG).show();
         }else {
             Toast.makeText(this,"No es posible Borrar el Registro!",Toast.LENGTH_SHORT).show();
         }
@@ -731,7 +547,8 @@ public class MainActivity extends AppCompatActivity {
         CharSequence title=item.getTitle();
         if(title=="NUEVO REGISTRO")
         {
-            displayDialog(!forUpdate);
+           // displayDialog(!forUpdate);
+            Toast.makeText(this,"No tiene permisos para Agregar Registros!",Toast.LENGTH_LONG).show();
 
         }else  if(title=="EDITAR ULTIMO ESTADO")
         {
@@ -740,14 +557,14 @@ public class MainActivity extends AppCompatActivity {
         }else  if(title=="BORRAR")
         {
 
-            delete();
+            Toast.makeText(this,"No tiene permisos para Borrar el Registro!",Toast.LENGTH_LONG).show();
         }
 
         return super.onContextItemSelected(item);
     }
 
-    }
 
 
 
 
+}

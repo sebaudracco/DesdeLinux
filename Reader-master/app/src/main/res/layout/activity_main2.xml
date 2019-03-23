@@ -2,7 +2,7 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:layout_gravity="center"
@@ -39,8 +39,8 @@
             android:text="@string/lec" />
 
         <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="650dp"
+            android:layout_width="330dp"
+            android:layout_height="match_parent"
             android:layout_gravity="center"
             android:gravity="fill_vertical"
             android:orientation="vertical">
@@ -48,18 +48,18 @@
 
             <Button
                 android:id="@+id/SqliteToExcel"
-                android:layout_width="293dp"
-                android:layout_height="81dp"
+                android:layout_width="300dp"
+                android:layout_height="70dp"
                 android:layout_marginLeft="13dp"
-                android:layout_marginBottom="20dp"
+                android:layout_marginBottom="50dp"
                 android:background="@drawable/sqlitetoexcelbutton"
-                android:text="Exportar a Excel"
+                android:text="Finalizar Ruta"
                 android:textColor="#000000" />
 
             <Button
                 android:id="@+id/readExcelButton"
-                android:layout_width="293dp"
-                android:layout_height="91dp"
+                android:layout_width="300dp"
+                android:layout_height="70dp"
                 android:layout_marginLeft="13dp"
                 android:background="@drawable/sqlitetoexcelbutton"
                 android:gravity="center"

@@ -142,26 +142,7 @@
             android:layout_height="match_parent"
             android:orientation="vertical">
 
-            <Button
-                android:id="@+id/btnCargarImg"
-                android:layout_width="310dp"
-                android:layout_height="26dp"
-                android:layout_alignParentBottom="true"
-                android:layout_marginStart="17dp"
-                android:layout_marginLeft="17dp"
-                android:background="@color/colorAccent"
-                android:onClick="onclick"
-                android:text="Selecciona Imagen"
-                android:textColor="#ffff" />
 
-            <ImageView
-                android:id="@+id/imagemId"
-                android:layout_width="match_parent"
-                android:layout_height="121dp"
-                android:layout_below="@+id/textView"
-                android:layout_alignEnd="@+id/textView"
-                android:layout_alignRight="@+id/textView"
-                 />
 
 
         </LinearLayout>

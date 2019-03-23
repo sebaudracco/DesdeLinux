@@ -21,7 +21,7 @@ public class MyViewHolder implements View.OnLongClickListener,View.OnCreateConte
         nameTxt3=  v.findViewById( R.id.nameTxt3);
         nameTxt4=  v.findViewById( R.id.nameTxt4);
         nameTxt5=  v.findViewById( R.id.nameTxt5);
-        imagemId=  v.findViewById ( R.id.imagemId);
+  //      imagemId=  v.findViewById ( R.id.imagemId);
       //  img=v.findViewById (R.id.img);
 
 
@@ -45,8 +45,8 @@ public class MyViewHolder implements View.OnLongClickListener,View.OnCreateConte
         menu.setHeaderTitle("Se Requiere : ");
 
         menu.add(0, 0, 0, "NUEVO REGISTRO");
-        menu.add(0,1,0,"EDITAR ULTIMO ESTADO");
-        menu.add(0,2,0,"BORRAR");
+        menu.add(0,2,0,"EDITAR ULTIMO ESTADO");
+        menu.add(0,3,0,"BORRAR");
 
 
     }
