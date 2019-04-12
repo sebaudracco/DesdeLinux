@@ -28,7 +28,9 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.EditorInfo;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.google.android.gms.common.ConnectionResult;
@@ -84,6 +86,7 @@ public class SqliteActivity extends AppCompatActivity{
     private static final int REQUEST_CODE_SIGN_IN = 0;
     private static final int REQUEST_CODE_CAPTURE_IMAGE = 1;
     private static final int REQUEST_CODE_CREATOR = 2;
+    EditText To;
 
     GoogleAccountCredential mCredential;
     ProgressDialog mProgress;
@@ -129,7 +132,7 @@ public class SqliteActivity extends AppCompatActivity{
             //    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
              //       attachment.setBackgroundTintList (ColorStateList.valueOf (getResources ().getColor (R.color.colorPrimary)));
             //    }
-                 attachment.setText("Listo!");
+                 attachment.setText("Archivo Listo!");
             }
         });
 
@@ -145,7 +148,7 @@ public class SqliteActivity extends AppCompatActivity{
 
 
                 openActivity ();
-
+                To = findViewById(R.id.To);
                 getResultsFromApi (v);
 
 
@@ -178,11 +181,11 @@ public class SqliteActivity extends AppCompatActivity{
 
         // Initializing Progress Dialog
         mProgress = new ProgressDialog(this);
-        mProgress.setMessage("Enviando Email a la Cooperativa!");
+        mProgress.setMessage("Enviando Email !");
 
         sqliteToExcelButton2 =  findViewById(R.id.SqliteToExcel2);
         attachment =findViewById (R.id.attachment);
-        //sendFabButton = findViewById(R.id.sendFabButton);
+        To = findViewById(R.id.To);
       //  edtToAddress = findViewById(R.id.EmailAddress);
       //  edtMessage = findViewById(R.id.note_value);
         // sendFabButton = findViewById (R.id.sendFabButton);
@@ -346,11 +349,13 @@ public class SqliteActivity extends AppCompatActivity{
 
         private String getDataFromApi() throws IOException {
             // getting Values for to Address, from Address, Subject and Body
+            To = findViewById(R.id.To);
+
             String user = "me";
-            String to = "cooppiquillin@hotmail.com";
+            String to = To.getText ().toString ().trim ();
             String from = mCredential.getSelectedAccountName();
             String subject = "Lector de Estados";
-            File file = new File (SqliteActivity.this.getExternalCacheDir (), "/LecturaDeEstados.xls");
+
             String bodyText = "Estimado/a Administrador/a:\n \n  Envío Lectura de Estados,\n \n  Saludos!";
             MimeMessage mimeMessage;
             String response = "";
