@@ -8,6 +8,7 @@
     tools:context=".LoginActivity">
 
     
+    
 <LinearLayout
     android:id="@+id/text_view_container"
     android:layout_width="wrap_content"
@@ -42,6 +43,7 @@
 
 </LinearLayout>
 
+    
 <Button
     android:id="@+id/signOutButton"
     android:layout_width="fill_parent"
